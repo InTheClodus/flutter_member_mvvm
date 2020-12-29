@@ -12,8 +12,7 @@ class LoginView extends View<LoginViewModel> {
 
   @override
   Widget build(BuildContext context) {
-
-    $Model.context=context;
+    $Model.context = context;
     return Scaffold(
         body: Container(
             margin: EdgeInsets.only(top: 100, bottom: 30),
@@ -32,14 +31,14 @@ class LoginView extends View<LoginViewModel> {
                 SizedBox(height: 10),
                 $.adapt<String>(#password,
                     builder: (emit) => TextField(
-                      onChanged: (v) => emit(),
-                      obscureText: true,
-                      controller: $Model.passwordCtrl,
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Password',
-                      ),
-                    ),
+                          onChanged: (v) => emit(),
+                          obscureText: true,
+                          controller: $Model.passwordCtrl,
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Password',
+                          ),
+                        ),
                     valueGetter: () => $Model.passwordCtrl.text,
                     valueSetter: (v) => $Model.passwordCtrl.text = v,
                     valueChanged: (v, k) => print("$k: $v")),
@@ -49,35 +48,35 @@ class LoginView extends View<LoginViewModel> {
                     builder: $.builder1((AsyncSnapshot snapshot) {
                       return Text("${snapshot.error}",
                           style:
-                          TextStyle(color: Colors.redAccent, fontSize: 16));
+                              TextStyle(color: Colors.redAccent, fontSize: 16));
                     })),
                 Container(
                     margin: EdgeInsets.only(top: 80),
                     width: double.infinity,
                     child: $.watchAnyFor<String>(const [#userName, #password],
                         builder: $.builder2((_, child) => RaisedButton(
-                            onPressed: (){
-                              var rep = $Model.link(#login, resetOnBefore: true);
-                              print(rep);
-                            },
+                            onPressed: $Model.inputValid
+                                ? $Model.link(#login, resetOnBefore: true)
+                                : null,
                             child: child,
                             color: Colors.blueAccent,
                             textColor: Colors.white)),
                         child: $.watchFor(#login,
                             builder: $.builder2(
-                                    (AsyncSnapshot snapshot, child) =>
-                                snapshot.connectionState ==
-                                    ConnectionState.waiting
-                                    ? _buildWaitingWidget()
-                                    : child),
+                                (AsyncSnapshot snapshot, child) =>
+                                    snapshot.connectionState ==
+                                            ConnectionState.waiting
+                                        ? _buildWaitingWidget()
+                                        : child),
                             child: Text("login")))),
                 SizedBox(height: 20),
                 $.$ifFor<AsyncSnapshot<ParseResponse>>(#login,
                     valueHandle: (AsyncSnapshot snapshot) => snapshot.hasData,
-                    builder: $.builder1((AsyncSnapshot<ParseResponse> snapshot) => Text(
-                        "${snapshot.data.statusCode}",
-                        style:
-                        TextStyle(color: Colors.blueAccent, fontSize: 20))))
+                    builder: $.builder1(
+                        (AsyncSnapshot<ParseResponse> snapshot) => Text(
+                            "${snapshot.data.statusCode}",
+                            style: TextStyle(
+                                color: Colors.blueAccent, fontSize: 20))))
               ],
             )));
   }

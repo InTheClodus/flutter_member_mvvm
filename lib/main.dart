@@ -27,8 +27,8 @@ class _MyAppState extends State<MyApp> {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     try {
       await Parse().initialize(
-          " ", " ",
-        masterKey: " ",
+          "macauscholar", "https://macauscholar.demo.ourmi.biz/api",
+        masterKey: "7GTH8NLumCHd/v/HfLvYSAejq2Xf6K9D9hSNxliIRt0=",
           coreStore: await CoreStoreSembastImp.getInstance(appDocDir.path + "/data"));
     } catch (e) {}
     final ParseResponse response = await Parse().healthCheck();

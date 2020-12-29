@@ -10,9 +10,6 @@ class RemoteService {
     ParseResponse response;
     try{
       response = await ParseUser.loginWith("ad", {"id": userName, "password": password});
-      if(response.success){
-        // Navigator.push(context, MaterialPageRoute(builder: (context)=>TestPage()));
-      }
     }catch(e){}
     return response;
   }

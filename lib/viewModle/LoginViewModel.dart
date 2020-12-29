@@ -6,6 +6,7 @@ import 'package:mvvm/mvvm.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 import '../service/RemoteService.dart';
+import '../test.dart';
 // ViewModel
 class LoginViewModel extends ViewModel with AsyncViewModelMixin {
   final RemoteService _service;
@@ -24,7 +25,11 @@ class LoginViewModel extends ViewModel with AsyncViewModelMixin {
 
     propertyAsync<ParseResponse>(
         #login, () => _service.login(userNameCtrl.text, passwordCtrl.text,context),
-        valueChanged: (v, k) => print("$k: $v"));
+        valueChanged: (v, k) => print("$k: $v"),onSuccess: (v){
+          if(v.success){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>TestPage()));
+          }
+    });
   }
 
   bool get inputValid =>
