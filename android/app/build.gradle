@@ -43,6 +43,10 @@ android {
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
+        manifestPlaceholders = [
+                AMAP_KEY : "aa9f0cf8574400f2af0078392c556e25", /// 高德地图key
+        ]
     }
 
     buildTypes {
@@ -60,4 +64,6 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    /// 注意这里需要在主项目增加一条依赖，否则可能发生编译不通过的情况
+    implementation 'com.amap.api:location:latest.integration'
 }
