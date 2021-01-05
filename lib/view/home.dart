@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_member_mvvm/viewmodels/home_model.dart';
+import 'package:flutter_member_mvvm/widget/custom_card.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:provider/provider.dart';
 
@@ -7,6 +8,7 @@ import '../view_state.dart';
 import 'base_view.dart';
 
 class HomeView extends StatelessWidget {
+  List<String> list = ["1",'1','2','3'];
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
@@ -20,7 +22,11 @@ class HomeView extends StatelessWidget {
           appBar: AppBar(
             title: Text('首页'),
           ),
-          body: _buildBody(context, model),
+          body: SingleChildScrollView(
+            child: Column(
+              children: list.map((e) => CustomCard()).toList(),
+            ),
+          ),
       ),
     );
   }

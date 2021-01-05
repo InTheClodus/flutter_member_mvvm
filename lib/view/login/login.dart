@@ -11,7 +11,7 @@ import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:provider/provider.dart';
 
 import '../base_view.dart';
-
+import 'package:fluwx_no_pay/fluwx_no_pay.dart' as fluwx;
 class LoginView extends StatefulWidget {
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -26,6 +26,29 @@ class _LoginViewState extends State<LoginView> {
 
   // 电话号码登录
   bool _phone = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    listen();
+  }
+  void listen() async {
+    fluwx.weChatResponseEventHandler
+        .distinct((a, b) => a == b)
+        .listen((res) async {
+      if (res is fluwx.WeChatAuthResponse) {
+        final ParseCloudFunction function = ParseCloudFunction("wechatToken");
+        final Map<String, String> params = <String, String>{"code": res.code};
+        var result = await function.execute(parameters: params);
+        final ParseResponse response =
+        await ParseUser.loginWith("wechat", result.result);
+        if (response.success) {
+
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

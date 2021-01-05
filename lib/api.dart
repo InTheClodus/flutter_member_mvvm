@@ -1,4 +1,6 @@
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'package:fluwx_no_pay/fluwx_no_pay.dart' as fluwx;
 
 class Api {
   /// 发送验证码
@@ -22,5 +24,38 @@ class Api {
       return await ParseUser.loginWith(
           "sms", {"id": "+853-" + mobile, "requestId": requestId, "code": sms});
     } catch (e) {}
+  }
+
+  /// faceBook 登录
+  Future<ParseResponse> goToFacebookLogin() async {
+    final facebookLogin = FacebookLogin();
+    final result = await facebookLogin.logIn(['email']);
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        return await ParseUser.loginWith(
+            'facebook',
+            facebook(result.accessToken.token, result.accessToken.userId,
+                result.accessToken.expires));
+        break;
+
+      case FacebookLoginStatus.cancelledByUser:
+        print("登录取消");
+        break;
+      case FacebookLoginStatus.error:
+        print("登錄錯誤");
+        break;
+    }
+  }
+  /// 查询登录用户是否存在会员信息
+  Future<ParseResponse> getUserMemberInfo() async {
+    final ParseUser user = await ParseUser.currentUser();
+
+  }
+  void wechatLogin(){
+    fluwx.sendWeChatAuth(scope: "snsapi_userinfo", state: "儒林教育").then((data) {
+      print("DATA$data");
+    }).catchError((e) {
+      print('weChatLogin  e  $e');
+    });
   }
 }

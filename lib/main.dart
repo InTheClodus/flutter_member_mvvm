@@ -24,12 +24,13 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> initParse() async {
     print('object');
-    Directory appDocDir = await getApplicationDocumentsDirectory();
+    // Directory appDocDir = await getApplicationDocumentsDirectory();
     try {
       await Parse().initialize(
           "macauscholar", "https://macauscholar.demo.ourmi.biz/api",
         masterKey: "7GTH8NLumCHd/v/HfLvYSAejq2Xf6K9D9hSNxliIRt0=",
-          coreStore: await CoreStoreSembastImp.getInstance(appDocDir.path + "/data"));
+          // coreStore: await CoreStoreSembastImp.getInstance(appDocDir.path + "/data")
+      );
     } catch (e) {}
     final ParseResponse response = await Parse().healthCheck();
     if (response.success) {
@@ -37,6 +38,13 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  bool isIos(){
+    if(Platform.isIOS){
+      return true;
+    }else if(Platform.isAndroid){
+      return false;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

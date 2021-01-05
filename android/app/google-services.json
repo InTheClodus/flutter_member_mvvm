@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "494277542366",
+    "firebase_url": "https://thermal-wonder-114817.firebaseio.com",
+    "project_id": "thermal-wonder-114817",
+    "storage_bucket": "thermal-wonder-114817.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494277542366:android:3467d3b9854dc60f4b9d4f",
+        "android_client_info": {
+          "package_name": "com.macauscholar.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494277542366-eiho8skfdl9fj5alsgl7pr2sobffmiig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ9tsQGIqQCBN1U9CwaTRjMkW1XUG66Mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494277542366-eiho8skfdl9fj5alsgl7pr2sobffmiig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494277542366:android:da7f596bcd66717c4b9d4f",
+        "android_client_info": {
+          "package_name": "com.macauscholar.pickup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494277542366-eiho8skfdl9fj5alsgl7pr2sobffmiig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ9tsQGIqQCBN1U9CwaTRjMkW1XUG66Mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494277542366-eiho8skfdl9fj5alsgl7pr2sobffmiig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494277542366:android:4b5b63a0a8a058db4b9d4f",
+        "android_client_info": {
+          "package_name": "com.macauscholar.staff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494277542366-eiho8skfdl9fj5alsgl7pr2sobffmiig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ9tsQGIqQCBN1U9CwaTRjMkW1XUG66Mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494277542366-eiho8skfdl9fj5alsgl7pr2sobffmiig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

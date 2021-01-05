@@ -21,6 +21,13 @@ class LoginViewModel extends BaseModel {
     return await api.login(mobile,requestId, sms);
   }
 
+  Future<ParseResponse> facebookLogin()async{
+    return api.goToFacebookLogin();
+  }
+
+  Future<void> wechatLogin()async{
+    return api.wechatLogin();
+  }
   void startCountdown() {
     _countdownTime = 60;
     if (_timer == null) {
