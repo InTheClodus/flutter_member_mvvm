@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_member_mvvm/stytle/SvgImg.dart';
 import 'package:flutter_member_mvvm/stytle/img_path.dart';
+import 'package:flutter_member_mvvm/view/bottom/fitness_app_home_screen.dart';
 import 'package:flutter_member_mvvm/view/home.dart';
 import 'package:flutter_member_mvvm/viewmodels/login_model.dart';
 import 'package:flutter_member_mvvm/widget/custom_button.dart';
@@ -271,7 +272,7 @@ class _LoginViewState extends State<LoginView> {
                 response.result, smsTextController.text);
             if (rep.success) {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return HomeView();
+                return FitnessAppHomeScreen();
               }));
             }
           },
