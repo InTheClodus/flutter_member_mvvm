@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_member_mvvm/theme/fintness_app_theme.dart';
-import 'package:flutter_member_mvvm/view/bottom/traning/training_screen.dart';
+import 'package:flutter_member_mvvm/view/course/index.dart';
+import 'package:flutter_member_mvvm/view/index/index.dart';
 import 'package:flutter_member_mvvm/view/models/tabIcon_data.dart';
+import 'package:flutter_member_mvvm/view/scholar/index.dart';
+import 'package:flutter_member_mvvm/view/school_network/index.dart';
 
 import 'bottom_bar_view.dart';
 import 'my_diary/my_diary_screen.dart';
@@ -80,24 +83,43 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
           tabIconsList: tabIconsList,
           addClick: () {},
           changeIndex: (int index) {
-            if (index == 0 || index == 2) {
+            if (index == 0) {
               animationController.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
                 }
                 setState(() {
-                  tabBody =
-                      MyDiaryScreen(animationController: animationController);
+                  tabBody = IndexPage(animationController: animationController);
                 });
               });
-            } else if (index == 1 || index == 3) {
+            } else if (index == 1) {
               animationController.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
                 }
                 setState(() {
                   tabBody =
-                      TrainingScreen(animationController: animationController);
+                      IndexScholar(animationController: animationController);
+                });
+              });
+            } else if (index == 2) {
+              animationController.reverse().then<dynamic>((data) {
+                if (!mounted) {
+                  return;
+                }
+                setState(() {
+                  tabBody =
+                      IndexCourse(animationController: animationController);
+                });
+              });
+            } else if (index == 3) {
+              animationController.reverse().then<dynamic>((data) {
+                if (!mounted) {
+                  return;
+                }
+                setState(() {
+                  tabBody = IndexSchoolNetWork(
+                      animationController: animationController);
                 });
               });
             }

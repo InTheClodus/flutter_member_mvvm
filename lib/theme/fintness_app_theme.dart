@@ -46,6 +46,7 @@ class FitnessAppTheme {
       color: Color(0xff154D7C), fontSize: 15, fontWeight: FontWeight.w400);
   static const TextStyle tabTextNot = TextStyle(
       color: Color(0xff7B7B7B), fontSize: 15, fontWeight: FontWeight.w400);
+
   static const TextStyle headline = TextStyle(
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
