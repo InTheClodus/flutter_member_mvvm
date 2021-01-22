@@ -53,7 +53,7 @@ class _BottomBarViewState extends State<BottomBarView>
                 child: Column(
                   children: <Widget>[
                     SizedBox(
-                      height: 55,
+                      height: 60,
                       child: Padding(
                         padding:
                             const EdgeInsets.only(left: 8, right: 8, top: 4),
@@ -196,7 +196,7 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                       ),
                       widget.tabIconData.isSelected
                           ? Container(
-                              height: 4,
+                              height: 3,
                               margin: EdgeInsets.only(left: 13, right: 13),
                               decoration: BoxDecoration(
                                   color: Colors.amber,

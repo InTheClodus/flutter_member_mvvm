@@ -270,6 +270,7 @@ class _LoginViewState extends State<LoginView> {
           onPressed: () async {
             var rep = await model.login(mobileTextController.text,
                 response.result, smsTextController.text);
+            print(rep.error);
             if (rep.success) {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return FitnessAppHomeScreen();

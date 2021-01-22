@@ -5,9 +5,7 @@ import 'package:flutter_member_mvvm/view/index/index.dart';
 import 'package:flutter_member_mvvm/view/models/tabIcon_data.dart';
 import 'package:flutter_member_mvvm/view/scholar/index.dart';
 import 'package:flutter_member_mvvm/view/school_network/index.dart';
-
 import 'bottom_bar_view.dart';
-import 'my_diary/my_diary_screen.dart';
 
 class FitnessAppHomeScreen extends StatefulWidget {
   @override
@@ -33,7 +31,7 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
 
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
-    tabBody = MyDiaryScreen(animationController: animationController);
+    tabBody = IndexPage(animationController: animationController);
     super.initState();
   }
 

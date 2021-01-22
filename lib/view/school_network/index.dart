@@ -11,8 +11,10 @@ class IndexSchoolNetWork extends StatefulWidget {
 class _IndexPageState extends State<IndexSchoolNetWork> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.green,
+    return Scaffold(
+      body: Container(
+        color: Colors.green,
+      ),
     );
   }
 }
