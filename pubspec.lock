@@ -22,6 +22,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.2.4"
+  bloc:
+    dependency: transitive
+    description:
+      name: bloc
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "6.1.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -167,6 +174,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_bloc:
+    dependency: "direct main"
+    description:
+      name: flutter_bloc
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "6.1.1"
   flutter_cupertino_date_picker:
     dependency: "direct main"
     description:
@@ -200,11 +214,9 @@ packages:
   flutter_model_package:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: ce297037d6c20c32e9ff31a8f63f0383bfdd709f
-      url: "https://gitee.com/xg520/flutter_model_package.git"
-    source: git
+      path: "/Users/zhiyi/flutter pro/flutter_model_package"
+      relative: false
+    source: path
     version: "0.0.1"
   flutter_page_indicator:
     dependency: transitive
@@ -226,7 +238,7 @@ packages:
       name: flutter_screenutil
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.2.0"
+    version: "3.1.1"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -489,6 +501,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.13"
+  provide:
+    dependency: "direct main"
+    description:
+      name: provide
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
   provider:
     dependency: "direct main"
     description:
@@ -748,4 +767,4 @@ packages:
     version: "2.0.3"
 sdks:
   dart: ">=2.8.0 <3.0.0"
-  flutter: ">=1.18.0-6.0.pre <2.0.0"
+  flutter: ">=1.19.0-4.3.pre <2.0.0"

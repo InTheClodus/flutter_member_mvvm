@@ -13,6 +13,8 @@ class LoginViewModel extends BaseModel {
   Timer _timer;
   int _countdownTime = 0;
 
+  int _index;
+
   Future<ParseResponse> sendSms(String mobile) async {
    return await api.sensSms(mobile);
   }
@@ -60,4 +62,13 @@ class LoginViewModel extends BaseModel {
     notifyListeners();
   }
 
+  void ss(){
+    index +=1;
+  }
+
+  int get index =>_index;
+  set index(int v) {
+    _index = v;
+    notifyListeners();
+  }
 }

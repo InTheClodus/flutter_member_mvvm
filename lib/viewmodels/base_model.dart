@@ -24,6 +24,7 @@ class BaseModel extends ChangeNotifier {
   void dispose() {
     super.dispose();
     disposed = true;
+    print("-----dispose");
   }
 
   @override

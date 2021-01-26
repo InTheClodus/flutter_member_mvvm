@@ -5,6 +5,7 @@ import 'package:flutter_member_mvvm/view/index/index.dart';
 import 'package:flutter_member_mvvm/view/models/tabIcon_data.dart';
 import 'package:flutter_member_mvvm/view/scholar/index.dart';
 import 'package:flutter_member_mvvm/view/school_network/index.dart';
+import 'app_barleading.dart';
 import 'bottom_bar_view.dart';
 
 class FitnessAppHomeScreen extends StatefulWidget {
@@ -35,6 +36,8 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
     super.initState();
   }
 
+  num backcolor = 0Xff2D7FC7;
+
   @override
   void dispose() {
     animationController.dispose();
@@ -46,6 +49,12 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
     return Container(
       color: FitnessAppTheme.background,
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color(backcolor),
+          elevation: 0, //取消頂部陰影
+          leading: AppBarLeading(), //個人中心
+          // actions: <Widget>[StudentStates()], //接送狀態
+        ),
         backgroundColor: Colors.transparent,
         body: FutureBuilder<bool>(
           future: getData(),
@@ -82,6 +91,7 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
           addClick: () {},
           changeIndex: (int index) {
             if (index == 0) {
+              backcolor = 0Xff2D7FC7;
               animationController.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
@@ -91,6 +101,7 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
                 });
               });
             } else if (index == 1) {
+              backcolor = 0Xff9eba31;
               animationController.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
@@ -101,6 +112,7 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
                 });
               });
             } else if (index == 2) {
+              backcolor = 0Xffffc128;
               animationController.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
@@ -111,6 +123,7 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
                 });
               });
             } else if (index == 3) {
+              backcolor = 0Xff154471;
               animationController.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
