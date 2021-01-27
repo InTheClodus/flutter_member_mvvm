@@ -17,7 +17,6 @@ class _IndexPageState extends State<IndexSchoolNetWork> {
     return Scaffold(
       body: BaseView<LoginViewModel>(
         model: LoginViewModel(api: Provider.of(context)),
-
         onModelReady: (model){},
         builder: (context,model,child){
           return Container(

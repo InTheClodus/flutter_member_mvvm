@@ -159,7 +159,6 @@ class _IndexPageState extends State<IndexCourse> {
 
   /// 内容item
   Widget contentItem(String title,List<CourseClass> classs) {
-    Future future = CourseClass.getForCategory(title);
     return EasyRefresh(
       child: Column(
         children: classs.map((e) => CustomCard(

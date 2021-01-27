@@ -67,7 +67,7 @@ dependencies:
   #
   get_it: ^1.0.3+2
 #  bloc模式
-  flutter_bloc: ^6.1.1
+#  flutter_bloc: ^6.1.1
   permission_handler: ^5.0.0
 #相册功能
   image_picker: ^0.6.1
