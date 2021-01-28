@@ -32,7 +32,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initParse() async {
-    print('object');
     // Directory appDocDir = await getApplicationDocumentsDirectory();
     try {
       await Parse().initialize(
@@ -43,7 +42,7 @@ class _MyAppState extends State<MyApp> {
     } catch (e) {}
     final ParseResponse response = await Parse().healthCheck();
     if (response.success) {
-      print("初始化成功");
+
     }
   }
 

@@ -132,7 +132,6 @@ class CustomCard extends StatelessWidget {
   }
 
   Widget _checkData(String title, Widget child) {
-    print(title);
     if (title == null || title == "" || title == "null") {
       return Container();
     }

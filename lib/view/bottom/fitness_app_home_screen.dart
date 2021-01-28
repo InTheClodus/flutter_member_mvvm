@@ -44,6 +44,7 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
     super.dispose();
   }
 
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Container(

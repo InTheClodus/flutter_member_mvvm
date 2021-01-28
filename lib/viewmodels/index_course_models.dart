@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_member_mvvm/api.dart';
 import 'package:flutter_member_mvvm/viewmodels/base_model.dart';
+import 'package:flutter_model_package/CourseCategory.dart';
 import 'package:flutter_model_package/CourseClass.dart';
 import 'package:collection/collection.dart';
 
@@ -10,11 +11,13 @@ class IndexCourseModels extends BaseModel {
   IndexCourseModels({@required Api api}) : super(api:api);
 
   List<List<CourseClass>> _listCourseclass= [];
-
+  List<CourseClass> listTitle=[];
   Map<String, List<CourseClass>> _mapCourseClass = {};
   /// 课程数据
   List<CourseClass> listCourseClass = [];
 
+  /// 顶部 tab
+  List<CourseCategory> categories = [];
   Future<void> queryClass()async{
    var rep = await CourseClass.getTaggedCourse(["recommented", 'hot', 'latest']);
    courseClass = rep;
@@ -22,13 +25,7 @@ class IndexCourseModels extends BaseModel {
 
   /// 課程
   Future<void> getCourseClass() async {
-    var query = CourseClass().queryCourse();
-    var rep = await query.query();
-    if (rep.results.isNotEmpty && rep.success) {
-      listCourseClass = rep.results.map((e) => e as CourseClass).toList();
-      mapCourseClass = groupBy(
-          listCourseClass, (obj) => obj["course"]['category']['title']);
-    }
+    categories = await CourseCategory.getCategories();
   }
 
   List<List<CourseClass>> get courseClass => _listCourseclass;

@@ -53,9 +53,7 @@ class Api {
   }
   void wechatLogin(){
     fluwx.sendWeChatAuth(scope: "snsapi_userinfo", state: "儒林教育").then((data) {
-      print("DATA$data");
     }).catchError((e) {
-      print('weChatLogin  e  $e');
     });
   }
 }

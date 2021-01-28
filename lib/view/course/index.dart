@@ -3,15 +3,15 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_member_mvvm/routes/navigator_util.dart';
 import 'package:flutter_member_mvvm/theme/font_theme.dart';
 import 'package:flutter_member_mvvm/util/date_util.dart';
-import 'package:flutter_member_mvvm/util/math_distance.dart';
+
 import 'package:flutter_member_mvvm/util/over_scroll_behavior.dart';
 import 'package:flutter_member_mvvm/view/base_view.dart';
 import 'package:flutter_member_mvvm/viewmodels/index_course_models.dart';
 import 'package:flutter_member_mvvm/widget/check_widget.dart';
 import 'package:flutter_member_mvvm/widget/custom_card.dart';
-import 'package:flutter_member_mvvm/widget/loading_dialog.dart';
 import 'package:flutter_member_mvvm/widget/single_choice.dart';
 import 'package:flutter_member_mvvm/widget/with_search_component.dart';
+import 'package:flutter_model_package/CourseCategory.dart';
 import 'package:flutter_model_package/CourseClass.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +22,7 @@ class IndexCourse extends StatefulWidget {
   final AnimationController animationController;
 
   const IndexCourse({Key key, this.animationController}) : super(key: key);
+
   @override
   _IndexPageState createState() => _IndexPageState();
 }
@@ -29,96 +30,89 @@ class IndexCourse extends StatefulWidget {
 class _IndexPageState extends State<IndexCourse> {
   /// 搜索焦点
   FocusNode _focusNode = FocusNode();
-  /// 位置
-  // Location _location;
-
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     TabController _tabController;
     return BaseView<IndexCourseModels>(
-      onModelReady: (model) async{
+      onModelReady: (model) async {
         await model.getCourseClass();
         await model.queryClass();
       },
       model: IndexCourseModels(api: Provider.of(context)),
-      builder: (context,model,child)=>DefaultTabController(
-        length: model.mapCourseClass.length+1,
+      builder: (context, model, child) => DefaultTabController(
+        length: model.categories.length + 1,
         child: GestureDetector(
           behavior: HitTestBehavior.translucent,
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },
           child: WithSearchComponent(
-            downColor: Color(0Xffffe7a7),
-          upColor: Color(0Xffffc128),
-          searchHistorys: ['aaaaa', 'bbbbbb', 'ccccc'],
-          popularSearches: ["1111", '22222', '33333'],
-          focusNode: _focusNode,
-          body: Column(
-            children: [
-              Row(
+              downColor: Color(0Xffffe7a7),
+              upColor: Color(0Xffffc128),
+              searchHistorys: ['aaaaa', 'bbbbbb', 'ccccc'],
+              popularSearches: ["1111", '22222', '33333'],
+              focusNode: _focusNode,
+              body: Column(
                 children: [
-                  SizedBox(
-                    width: 10,
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () => _openBottomSheet(),
+                        child: Image(
+                          image: AssetImage("assets/images/filter.png"),
+                          height: 25,
+                          width: 25,
+                        ),
+                      ),
+                      new TabBar(
+                        indicatorColor: Colors.yellow,
+                        isScrollable: true,
+                        indicatorWeight: 4,
+                        indicatorPadding: EdgeInsets.fromLTRB(35, 0, 35, 0),
+                        labelColor: Color(0xff2D7FC7),
+                        unselectedLabelColor: Color(0xffd9d9d9),
+                        labelStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: ScreenUtil().setSp(16)),
+                        tabs: listTabTitle(model),
+                        controller: _tabController,
+                      ),
+                    ],
                   ),
-                  GestureDetector(
-                    onTap: () => _openBottomSheet(),
-                    child: Image(
-                      image: AssetImage("assets/images/filter.png"),
-                      height: 25,
-                      width: 25,
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(
+                        bottom: 62 + MediaQuery.of(context).padding.bottom,
+                      ),
+                      child: TabBarView(
+                        children: listTabView(width, model),
+                      ),
                     ),
-                  ),
-                  new TabBar(
-                    indicatorColor: Colors.yellow,
-                    //指示器颜色
-                    isScrollable: true,
-                    indicatorWeight: 4,
-                    //指示器高度
-                    indicatorPadding: EdgeInsets.fromLTRB(35, 0, 35, 0),
-                    //底部指示器的Padding
-                    labelColor: Color(0xff2D7FC7),
-                    //选中label颜色
-                    unselectedLabelColor: Color(0xffd9d9d9),
-                    //未选中label颜色
-                    labelStyle: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: ScreenUtil().setSp(16)),
-                    tabs: listTabTitle(model),
-                    controller: _tabController,
                   ),
                 ],
-              ),
-              Expanded(
-                child: Container(
-                    padding: EdgeInsets.only(
-                      bottom: 62 + MediaQuery.of(context).padding.bottom,
-                    ),
-                  child: TabBarView(
-                    children: listTabView(width,model),
-                  ),
-                ),
-              ),
-            ],
-          )),
+              )),
         ),
       ),
     );
   }
 
-
   Widget tabview(List<List<CourseClass>> list) {
     return SingleChildScrollView(
       child: Column(
-        children: list.map((e) => Container(
-          margin: EdgeInsets.all(10),
-          child: ItemWidget(
-            courseClssList: e,
-            path: "/curriculum/details",
-          ),
-        )).toList(),
+        children: list
+            .map((e) => Container(
+                  margin: EdgeInsets.all(10),
+                  child: ItemWidget(
+                    courseClssList: e,
+                    path: "/curriculum/details",
+                  ),
+                ))
+            .toList(),
       ),
     );
   }
@@ -139,37 +133,54 @@ class _IndexPageState extends State<IndexCourse> {
     listWidget.add(Tab(
       text: "全部",
     ));
-    model.mapCourseClass.forEach((key, value) {
+    model.categories.forEach((value) {
       listWidget.add(Tab(
-        text: key,
+        text: value.get("title"),
       ));
     });
     return listWidget;
   }
 
 //  tabview
-  List<Widget> listTabView(width,IndexCourseModels model) {
+  List<Widget> listTabView(width, IndexCourseModels model) {
     List<Widget> listWidget = [];
     listWidget.add(tabview(model.courseClass));
-    model.mapCourseClass.forEach((key, value) {
-      listWidget.add(contentItem(key,value));
+    model.categories.forEach((value) {
+      listWidget.add(contentItem(value));
     });
     return listWidget;
   }
 
   /// 内容item
-  Widget contentItem(String title,List<CourseClass> classs) {
-    return EasyRefresh(
-      child: Column(
-        children: classs.map((e) => CustomCard(
-            title: e["course"]['title'],
-            onTop: () => NavigatorUtil.jumpLoginState(context,
-                title: "/curriculum/details/${e.objectId}"),
-            onTopAddress: () => print("object"),
-            address: e['branch']['address'],
-            startAndEndDate:
-            DateUtil.formatTowDate(e["startDate"], e["endDate"]))).toList(),
-      ),
+  Widget contentItem(CourseCategory category) {
+    Future futureForCategory = CourseClass.getForCategory(category);
+    return FutureBuilder<List<CourseClass>>(
+      future: futureForCategory,
+      builder:
+          (BuildContext context, AsyncSnapshot<List<CourseClass>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return EasyRefresh(
+            onRefresh: () async {
+              setState(() {
+                futureForCategory = CourseClass.getForCategory(category);
+              });
+            },
+            child: Column(
+              children: snapshot.data.map((e) {
+                return CustomCard(
+                    title: e["course"]['title'],
+                    onTop: () => NavigatorUtil.jumpLoginState(context,
+                        title: "/curriculum/details/${e.objectId}"),
+                    onTopAddress: () => print("object"),
+                    address: e['branch']['address'],
+                    startAndEndDate:
+                        DateUtil.formatTowDate(e["startDate"], e["endDate"]));
+              }).toList(),
+            ),
+          );
+        }
+        return Text("加载中");
+      },
     );
   }
 
@@ -214,7 +225,7 @@ class _IndexPageState extends State<IndexCourse> {
             child: Column(
               children: [
                 changtiao(),
-                titleRow(),
+                titleRow(context),
                 divider,
                 title("排序"),
                 SingleChoice(
@@ -229,8 +240,6 @@ class _IndexPageState extends State<IndexCourse> {
     );
   }
 
-
-
   Widget title(String title) {
     return Container(
       alignment: Alignment.centerLeft,
@@ -242,7 +251,7 @@ class _IndexPageState extends State<IndexCourse> {
     );
   }
 
-  Widget titleRow() {
+  Widget titleRow(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 20, bottom: 5),
       child: Row(
@@ -253,7 +262,7 @@ class _IndexPageState extends State<IndexCourse> {
               "重設",
               style: FontTheme().lightGreenText,
             ),
-            onTap: () => NavigatorUtil.goBack(context),
+            onTap: () => Navigator.pop(context),
           ),
           SizedBox(
             width: 20,
@@ -270,7 +279,7 @@ class _IndexPageState extends State<IndexCourse> {
               "完成",
               style: FontTheme().lightBlueText,
             ),
-            onTap: () => NavigatorUtil.goBack(context),
+            onTap: () => Navigator.pop(context),
           )
         ],
       ),
